@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  web:
+    image: php:7.4-apache
+    restart: always
+    volumes:
+      - ./index.php:/var/www/html/index.php
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.myapp.rule=Host(`srvmail.nicoledepaula.adv.br`)"
+      - "traefik.http.routers.myapp.entrypoints=websecure"
+      - "traefik.http.routers.myapp.tls=true"
+      - "traefik.http.routers.myapp.tls.certresolver=myresolver"
